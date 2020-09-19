@@ -1,0 +1,10 @@
+---
+orbs:
+  helm: frameio/helm@0.15.0
+version: 2.1
+workflows:
+  lint-chart:
+    jobs:
+      - helm/lint:
+          path: chart/.
+...

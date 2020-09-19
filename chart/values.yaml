@@ -1,0 +1,75 @@
+---
+# Default values for generic chart.
+# The file values.yaml found in each repository will override this one.
+
+#
+# Deployment parameters
+#
+
+replicaCount: 1
+
+image:
+  repository: private.repo.local:5000/path/to/image
+  tag: 0.0.0 
+  pullPolicy: IfNotPresent
+  pullSecrets: 
+    enabled: false
+
+probes:
+  enabled: false
+  livenessPath: /internal/liveness
+  readinessPath: /internal/readiness
+  liveness:
+    initialDelaySeconds: 0
+    timeoutSeconds: 1
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+  readiness:
+    initialDelaySeconds: 0
+    timeoutSeconds: 1
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+
+#
+# ConfigMap parameters
+#
+
+configmap:
+  enabled: false
+  variables: {}
+  #  Examples:
+  #  username-database: 111
+  #  passwd-database: password
+
+#
+# Service parameters
+#
+
+service:
+  enabled: false
+  port: 80
+  targetPort: 80
+
+#
+# Ingress parameters
+#
+
+ingress:
+  enabled: false
+  host: local.web.image
+  tls: true
+
+#
+# Cronjob parameters
+#
+
+cronjob:
+  enabled: false
+  schedule: "* * * * *"
+  image: private.repo.local:5000/path/to/image:latest
+  restartPolicy: Never
+  command:
+  - echo "Testing cronjob"
+...
