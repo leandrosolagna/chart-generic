@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+name: chart-generic
+description: A generic Helm chart
+type: application
+version: 0.1.0
+icon: https://www.iconfinder.com/data/icons/medical-healthcare-15/24/pill_medicine_drug_pharmacy-512.png
+...

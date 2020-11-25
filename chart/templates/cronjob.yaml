@@ -1,0 +1,23 @@
+{{- if .Values.cronjob.enabled }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "helpers.selectorLabels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.cronjob.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: {{ .Values.cronjob.restartPolicy }}
+          containers:
+          - name: {{ .Release.Name }}
+            image: {{ .Values.cronjob.image }}
+            command:
+            {{- range .Values.cronjob.command }}
+            - {{ . }}
+            {{- end }}
+{{- end }}
